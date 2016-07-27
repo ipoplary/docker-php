@@ -1,0 +1,4 @@
+db.createUser({ user: 'admin', pwd: 'admin', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+db.auth('admin', 'admin');
+use portals;
+db.createUser({ user: 'portals', pwd: 'portals', roles: [ { role: "dbAdmin", db: "portals" }, { role: "readWrite", db: "portals" } ] });

@@ -1,0 +1,14 @@
+dev:
+    build: ./Dockerfile
+    container_name: dev_debian
+    ports:
+        - "80:80"
+        - "3306:3306"
+        - "27017:27017"
+    volumes:
+        - ./opt/config/nginx/sites-enabled:/etc/nginx/sites-enabled
+        - ./opt/log/nginx:/opt/log/nginx
+        - ./opt/www:/opt/www
+        - ./opt/data/mysql:/var/lib/mysql
+        - ./opt/data/mongodb:/var/lib/mongodb
+    command: echo hello world

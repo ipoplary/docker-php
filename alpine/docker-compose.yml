@@ -1,0 +1,19 @@
+dev:
+    build: ./Dockerfiles
+    container_name: dev
+    ports:
+        - "80:80"
+        - "443:443"
+        - "3306:3306"
+        - "27017:27017"
+    volumes:
+        - ./opt/config/nginx/sites-enabled:/etc/nginx/sites-enabled
+        - ./opt/log/nginx:/opt/log/nginx
+        - ./opt/log/mysql:/opt/log/mysql
+        - ./opt/data/mysql:/var/lib/mysql
+        - ./opt/data/mongodb:/var/lib/mongodb
+        - /www:/opt/www
+    environment:
+        DB_ROOT_PASS: testmysql
+        DB_USER: docker
+        DB_PASS: docker

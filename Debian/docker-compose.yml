@@ -1,0 +1,48 @@
+nginx:
+    build: ./Dockerfiles/nginx
+    container_name: dev_nginx
+    ports:
+        - "80:80"
+    links:
+        - "php"
+    volumes:
+        - ./opt/config/nginx/sites-enabled:/etc/nginx/sites-enabled
+        - ./opt/log/nginx:/opt/log/nginx
+        - ./opt/www:/opt/www
+
+php:
+    build: ./Dockerfiles/php
+    container_name: dev_php
+    ports:
+        - "9000:9000"
+    links:
+        - "mysql"
+        - "redis"
+        - "mongo"
+    volumes:
+        - ./opt/www:/opt/www
+
+mysql:
+    build: ./Dockerfiles/mysql
+    container_name: dev_mysql
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./opt/data/mysql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: testmysql
+
+mongo:
+    build: ./Dockerfiles/mongo
+    container_name: dev_mongo
+    ports:
+        - "27017:27017"
+    volumes:
+        - ./opt/data/mongodb:/var/lib/mongodb
+    command: --auth
+
+redis:
+    build: ./Dockerfiles/redis
+    container_name: dev_redis
+    ports:
+        - "6379:6379"

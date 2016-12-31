@@ -1,11 +1,11 @@
 version: '2'
 services:
-    # redis:
-    #     build: ./Dockerfiles/redis
-    #     image: poplary/alpine_redis
-    #     container_name: dev_redis
-    #     ports:
-    #         - "6379:6379"
+    redis:
+        build: ./Dockerfiles/redis
+        image: poplary/alpine_redis
+        container_name: dev_redis
+        ports:
+            - "6379:6379"
 
     # mongo:
     #     build: ./Dockerfiles/mongo
@@ -39,7 +39,7 @@ services:
             - "9000:9000"
         links:
             - "mariadb"
-            # - "redis"
+            - "redis"
             # - "mongo"
         volumes:
             - "/www:/opt/www"

@@ -15,6 +15,7 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repos
     libmcrypt-dev \
     libxml2-dev \
     linux-headers \
+    sqlite-dev \
     cmake
 
 # 安装 php 扩展

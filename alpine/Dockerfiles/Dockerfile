@@ -1,8 +1,9 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 # 添加源并更新
-RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repositories && \
-    echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/community" >> /etc/apk/repositories && \
+RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" > /etc/apk/repositories && \
+    echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories && \
+    echo "https://mirror.tuna.tsinghua.edu.cn/alpine/edge/community" >> /etc/apk/repositories && \
     echo "https://mirror.tuna.tsinghua.edu.cn/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade
@@ -24,12 +25,17 @@ RUN apk add --no-cache -u php7 \
     php7-mcrypt \
     php7-json \
     php7-zip \
+    php7-zlib \
+    php7-sysvmsg \
+    php7-sysvsem \
+    php7-sysvshm \
     php7-dom \
     php7-mongodb \
     php7-xdebug \
     php7-mbstring \
     php7-redis \
     php7-pdo \
+    php7-pdo_mysql \
     php7-intl \
     php7-phar \
     php7-opcache \

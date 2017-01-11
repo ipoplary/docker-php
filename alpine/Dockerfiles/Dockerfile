@@ -67,9 +67,9 @@ RUN rm -rf /var/cache/apk/*
 RUN mkdir -p /etc/supervisord
 ADD supervisord/redis_start.sh /etc/supervisord/
 ADD supervisord/mysql_start.sh /etc/supervisord/
-ADD supervisord/mongo_start.sh /etc/supervisord/
+# ADD supervisord/mongo_start.sh /etc/supervisord/
 ADD supervisord/supervisord.conf /etc/
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
 
 # 暴露端口
-EXPOSE 80 443 3306 27017
+EXPOSE 80 443 3306

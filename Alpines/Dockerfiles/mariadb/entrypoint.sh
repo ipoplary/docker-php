@@ -24,10 +24,10 @@ then
 
     echo '=============== Root Password ==============='
     # 修改数据库密码，禁止通过 root 外部用户访问
-    echo "UPDATE mysql.user SET Password=PASSWORD('${MYSQL_ROOT_PASSWORD}') WHERE User='root';
-        DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-        DELETE FROM mysql.user WHERE User='';
-        FLUSH PRIVILEGES;" | mysql -u root
+    echo "UPDATE mysql.user SET Password=PASSWORD('${MYSQL_ROOT_PASSWORD}') WHERE User='root';\
+            DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');\
+            DELETE FROM mysql.user WHERE User='';\
+            FLUSH PRIVILEGES;" | mysql -u root
 
     sleep 2s
 

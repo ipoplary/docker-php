@@ -1,7 +1,8 @@
 FROM alpine:3.5
 
 # 添加源并更新
-RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" > /etc/apk/repositories && \
+RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repositories && \
+    echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" >> /etc/apk/repositories && \
     echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories && \
     echo "https://mirror.tuna.tsinghua.edu.cn/alpine/edge/community" >> /etc/apk/repositories && \
     echo "https://mirror.tuna.tsinghua.edu.cn/alpine/edge/testing" >> /etc/apk/repositories && \
@@ -11,12 +12,10 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" > /etc/apk/repos
 # bash
 RUN apk add bash
 
-# 安装 Supervisor
-RUN apk add --no-cache -u python py-pip && \
-    pip install supervisor
-
-# 安装 php7-fpm, redis, mongodb, nginx, mysql
-RUN apk add --no-cache -u php7 \
+# 安装 Supervisor, php7-fpm, redis, mongodb, nginx, mysql
+RUN apk add --no-cache -u python\
+    py-pip \
+    php7 \
     php7-common \
     php7-fpm \
     php7-gd \
@@ -47,7 +46,8 @@ RUN apk add --no-cache -u php7 \
     nginx \
     ca-certificates \
     mysql \
-    mysql-client
+    mysql-client && \
+    pip install supervisor
 
 # 添加配置文件
 RUN mkdir -p /etc/redis

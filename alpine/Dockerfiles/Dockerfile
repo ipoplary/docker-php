@@ -9,12 +9,9 @@ RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repos
     apk update && \
     apk upgrade
 
-# bash
-RUN apk add bash
 
-# 安装 Supervisor, php7-fpm, redis, mongodb, nginx, mysql
-RUN apk add --no-cache -u python\
-    py-pip \
+# 安装 bash, Supervisor, php7-fpm, redis, mongodb, nginx, mysql
+RUN apk add --no-cache -u  bash \
     php7 \
     php7-common \
     php7-fpm \
@@ -35,6 +32,7 @@ RUN apk add --no-cache -u python\
     php7-redis \
     php7-pdo \
     php7-pdo_mysql \
+    icu-dev \
     php7-intl \
     php7-phar \
     php7-opcache \
@@ -46,8 +44,8 @@ RUN apk add --no-cache -u python\
     nginx \
     ca-certificates \
     mysql \
-    mysql-client && \
-    pip install supervisor
+    mysql-client \
+    supervisor
 
 # 添加配置文件
 RUN mkdir -p /etc/redis
@@ -75,7 +73,7 @@ ADD supervisord/redis_start.sh /etc/supervisord/
 ADD supervisord/mysql_start.sh /etc/supervisord/
 # ADD supervisord/mongo_start.sh /etc/supervisord/
 ADD supervisord/supervisord.conf /etc/
-ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
+ENTRYPOINT ["supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
 # 暴露端口
 EXPOSE 80 443 3306
